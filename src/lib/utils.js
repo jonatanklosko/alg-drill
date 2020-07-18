@@ -7,3 +7,22 @@ export function shuffle([...arr]) {
   }
   return arr;
 }
+
+export function millisecondsNow() {
+  return Math.round(performance.now());
+}
+
+export function millisecondsToClockFormat(milliseconds) {
+  return new Date(milliseconds)
+    .toISOString()
+    .substr(11, 11)
+    .replace(/^[0:]*(?!\.)/g, '');
+}
+
+export function sum(xs) {
+  return xs.reduce((x, y) => x + y, 0);
+}
+
+export function mean(xs) {
+  return sum(xs) / xs.length;
+}
