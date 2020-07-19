@@ -6,12 +6,7 @@ function FinishView({ onReset, algStats }) {
   return (
     <Grid container direction="column" alignItems="center" spacing={2}>
       <Grid item>
-        <Button
-          variant="contained"
-          disableElevation
-          color="primary"
-          onClick={onReset}
-        >
+        <Button variant="contained" color="primary" onClick={onReset}>
           Repeat
         </Button>
       </Grid>

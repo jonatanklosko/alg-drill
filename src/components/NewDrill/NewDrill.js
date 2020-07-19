@@ -12,7 +12,7 @@ function NewDrill() {
     });
   }
 
-  return <DrillForm onSubmit={handleSubmit} />;
+  return <DrillForm onSubmit={handleSubmit} title="New drill" />;
 }
 
 export default NewDrill;

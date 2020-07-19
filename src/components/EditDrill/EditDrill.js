@@ -20,7 +20,9 @@ function EditDrill() {
   if (pending || !drill) return <LinearProgress />;
   if (error) return error.message;
 
-  return <DrillForm onSubmit={handleSubmit} initial={drill} />;
+  return (
+    <DrillForm onSubmit={handleSubmit} initial={drill} title="Edit drill" />
+  );
 }
 
 export default EditDrill;

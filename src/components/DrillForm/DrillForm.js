@@ -22,7 +22,7 @@ const DEFAULT_INITIAL = {
   stage: 'full',
 };
 
-function DrillForm({ onSubmit, initial = DEFAULT_INITIAL }) {
+function DrillForm({ onSubmit, initial = DEFAULT_INITIAL, title = 'Drill' }) {
   const [name, setName] = useState(initial.name);
   const [algsText, setAlgsText] = useState(initial.algs.join('\n'));
   const [topView, setTopView] = useState(initial.topView);
@@ -51,7 +51,7 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL }) {
       <form onSubmit={handleSubmit} style={{ minWidth: 500 }}>
         <Grid container direction="column" spacing={2}>
           <Grid item>
-            <Typography variant="h5">{`New drill`}</Typography>
+            <Typography variant="h5">{title}</Typography>
           </Grid>
           <Grid item>
             <TextField
@@ -113,7 +113,6 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL }) {
           <Grid item>
             <Button
               variant="contained"
-              disableElevation
               type="submit"
               color="primary"
               disabled={!isValid()}
