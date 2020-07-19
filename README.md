@@ -1,6 +1,6 @@
 # Alg Drill
 
-A tiny tool for quick practice of cubing algorithm recognition.
+A tiny tool for practicing recognition of newly learnt cubing algorithms.
 
 ## Development
 

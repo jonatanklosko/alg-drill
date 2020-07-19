@@ -45,12 +45,14 @@ function DrillCore({ drill }) {
   const handleStart = useCallback(() => {
     dispatch({ type: 'start' });
   }, []);
+
   const handleNext = useCallback(() => {
     dispatch({ type: 'next' });
   }, []);
-  const handleReset = useCallback(() => {
-    dispatch({ type: 'reset', algs: drill.algs });
-  }, [drill.algs]);
+
+  const handleRepeatAlgs = useCallback((algs) => {
+    dispatch({ type: 'reset', algs });
+  }, []);
 
   return (
     <div style={{ padding: 16, position: 'relative' }}>
@@ -70,7 +72,7 @@ function DrillCore({ drill }) {
       {finished && (
         <FinishView
           algStats={state.finishedAlgStats}
-          onReset={handleReset}
+          onRepeatAlgs={handleRepeatAlgs}
           cubeOptions={cubeOptions}
         />
       )}
