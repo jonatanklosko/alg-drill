@@ -53,6 +53,11 @@ function Layout({ children }) {
               Home
             </Link>
           </Grid>
+          <Grid item>
+            <Link component={RouterLink} to="/about">
+              What?
+            </Link>
+          </Grid>
         </Grid>
       </div>
     </div>

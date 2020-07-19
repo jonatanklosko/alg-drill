@@ -5,6 +5,7 @@ import Home from '../Home/Home';
 import NewDrill from '../NewDrill/NewDrill';
 import EditDrill from '../EditDrill/EditDrill';
 import Layout from '../Layout/Layout';
+import About from '../About/About';
 
 function Navigation() {
   return (
@@ -12,6 +13,9 @@ function Navigation() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/about">
+          <About />
         </Route>
         <Route exact path="/drills/new">
           <NewDrill />
