@@ -8,6 +8,7 @@ function StepView({
   finishedCount,
   totalCount,
   currentAlg,
+  rotationAndAUF,
   cubeOptions,
 }) {
   const progress = Math.round((finishedCount / totalCount) * 100);
@@ -39,7 +40,7 @@ function StepView({
         </Grid>
         <Grid item>
           <img
-            src={cubeImageUrl(currentAlg, cubeOptions)}
+            src={cubeImageUrl(currentAlg + rotationAndAUF, cubeOptions)}
             alt="Cube"
             height="300"
           />

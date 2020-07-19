@@ -1,3 +1,5 @@
+import { sample } from './utils';
+
 const MOVES_REGEXP = /([RLUDFB]w?|[rludfbMSExyz])2?'?/g;
 
 export function stringToMoves(string) {
@@ -15,4 +17,10 @@ export function prettify(string) {
 export function parseAlgsText(text) {
   const lines = text.split('\n');
   return lines.map(prettify).filter((alg) => alg);
+}
+
+export function randomRotationAndAUF() {
+  const rotation = sample(['', 'y', 'y2', "y'"]);
+  const auf = sample(['', 'U', 'U2', "U'"]);
+  return `${rotation} ${auf}`;
 }

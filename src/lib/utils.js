@@ -26,3 +26,8 @@ export function sum(xs) {
 export function mean(xs) {
   return sum(xs) / xs.length;
 }
+
+export function sample(xs) {
+  const index = Math.floor(Math.random() * xs.length);
+  return xs[index];
+}

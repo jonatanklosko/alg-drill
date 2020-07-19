@@ -3,12 +3,14 @@ import { shuffle, millisecondsNow } from '../../lib/utils';
 import FinishView from './FinishView';
 import StartView from './StartView';
 import StepView from './StepView';
+import { randomRotationAndAUF } from '../../lib/alg';
 
 function init(algs) {
   return {
     startMs: null,
     finishedAlgStats: [],
     remainingAlgs: shuffle(algs),
+    rotationAndAUF: randomRotationAndAUF(),
   };
 }
 
@@ -24,6 +26,7 @@ function reducer(state, action) {
         finishedAlgStats: [...state.finishedAlgStats, { alg, timeMs }],
         startMs: millisecondsNow(),
         remainingAlgs,
+        rotationAndAUF: randomRotationAndAUF(),
       };
     case 'reset':
       return init(action.algs);
@@ -59,6 +62,7 @@ function DrillCore({ drill }) {
             state.finishedAlgStats.length + state.remainingAlgs.length
           }
           currentAlg={state.remainingAlgs[0]}
+          rotationAndAUF={state.rotationAndAUF}
           cubeOptions={cubeOptions}
           onNext={handleNext}
         />
