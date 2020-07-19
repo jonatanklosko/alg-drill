@@ -6,7 +6,6 @@ import StepView from './StepView';
 
 function init(algs) {
   return {
-    algs, // maybe unnecessary
     startMs: null,
     finishedAlgStats: [],
     remainingAlgs: shuffle(algs),
@@ -35,6 +34,7 @@ function reducer(state, action) {
 
 function DrillCore({ drill }) {
   const [state, dispatch] = useReducer(reducer, drill.algs, init);
+  const cubeOptions = { topView: drill.topView, stage: drill.stage };
 
   const started = state.startMs !== null;
   const finished = state.remainingAlgs.length === 0;
@@ -55,13 +55,20 @@ function DrillCore({ drill }) {
       {started && !finished && (
         <StepView
           finishedCount={state.finishedAlgStats.length}
-          totalCount={state.algs.length}
+          totalCount={
+            state.finishedAlgStats.length + state.remainingAlgs.length
+          }
           currentAlg={state.remainingAlgs[0]}
+          cubeOptions={cubeOptions}
           onNext={handleNext}
         />
       )}
       {finished && (
-        <FinishView algStats={state.finishedAlgStats} onReset={handleReset} />
+        <FinishView
+          algStats={state.finishedAlgStats}
+          onReset={handleReset}
+          cubeOptions={cubeOptions}
+        />
       )}
     </div>
   );

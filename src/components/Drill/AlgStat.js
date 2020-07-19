@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AlgStat({ algStat }) {
+function AlgStat({ algStat, cubeOptions }) {
   const classes = useStyles();
   const { alg, timeMs } = algStat;
-  const imageUrl = cubeImageUrl(alg);
+  const imageUrl = cubeImageUrl(alg, cubeOptions);
 
   return (
     <Card className={classes.root}>

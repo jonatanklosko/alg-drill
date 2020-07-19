@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Button } from '@material-ui/core';
 import AlgStats from './AlgStats';
 
-function FinishView({ onReset, algStats }) {
+function FinishView({ onReset, algStats, cubeOptions }) {
   return (
     <Grid container direction="column" alignItems="center" spacing={2}>
       <Grid item>
@@ -11,7 +11,7 @@ function FinishView({ onReset, algStats }) {
         </Button>
       </Grid>
       <Grid item>
-        <AlgStats algStats={algStats} />
+        <AlgStats algStats={algStats} cubeOptions={cubeOptions} />
       </Grid>
     </Grid>
   );

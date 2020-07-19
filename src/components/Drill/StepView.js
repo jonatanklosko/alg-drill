@@ -3,7 +3,13 @@ import { Grid, Typography, Tooltip, LinearProgress } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
 import { cubeImageUrl } from '../../lib/url';
 
-function StepView({ onNext, finishedCount, totalCount, currentAlg }) {
+function StepView({
+  onNext,
+  finishedCount,
+  totalCount,
+  currentAlg,
+  cubeOptions,
+}) {
   const progress = Math.round((finishedCount / totalCount) * 100);
 
   useEffect(() => {
@@ -32,7 +38,11 @@ function StepView({ onNext, finishedCount, totalCount, currentAlg }) {
           </Typography>
         </Grid>
         <Grid item>
-          <img src={cubeImageUrl(currentAlg)} alt="Cube" height="300" />
+          <img
+            src={cubeImageUrl(currentAlg, cubeOptions)}
+            alt="Cube"
+            height="300"
+          />
         </Grid>
         <Grid item>
           <Tooltip

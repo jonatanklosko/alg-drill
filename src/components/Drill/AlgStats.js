@@ -3,7 +3,7 @@ import { Grid, Typography } from '@material-ui/core';
 import AlgStat from './AlgStat';
 import { mean, millisecondsToClockFormat, sum } from '../../lib/utils';
 
-function AlgStats({ algStats }) {
+function AlgStats({ algStats, cubeOptions }) {
   const sortedAlgStats = algStats.sort((x, y) => y.timeMs - x.timeMs);
   const timesMs = algStats.map(({ timeMs }) => timeMs);
   const meanTimeMs = mean(timesMs);
@@ -23,7 +23,7 @@ function AlgStats({ algStats }) {
       </Grid>
       {sortedAlgStats.map((algStat) => (
         <Grid item>
-          <AlgStat algStat={algStat} />
+          <AlgStat algStat={algStat} cubeOptions={cubeOptions} />
         </Grid>
       ))}
     </Grid>

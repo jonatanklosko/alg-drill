@@ -1,3 +1,5 @@
+import { shrink } from './alg';
+
 const IMAGE_BASE_URL = 'http://cube.crider.co.uk/visualcube.php';
 
 export const defaultColorScheme =
@@ -11,7 +13,7 @@ export function cubeImageUrl(alg, options = {}) {
     pzl: '333',
     sch: defaultColorScheme,
     r: 'y34x-34',
-    case: alg,
+    case: shrink(alg),
     /* Additional options */
     stage,
     view: topView ? 'plan' : '',
