@@ -2,6 +2,8 @@
 
 A tiny tool for practicing recognition of newly learnt cubing algorithms.
 
+![Demo](images/demo.gif)
+
 ## Development
 
 Requirements:
