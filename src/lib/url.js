@@ -1,6 +1,7 @@
 const IMAGE_BASE_URL = 'http://cube.crider.co.uk/visualcube.php';
 
-export const defaultColorScheme = 'FEFE00,EE0000,0000F2,FFFFFF,FFA100,00D800'; /* URFDLB */
+export const defaultColorScheme =
+  'FEFE00,EE0000,0000F2,FFFFFF,FFA100,00D800'; /* URFDLB */
 
 export function cubeImageUrl(alg, options = {}) {
   const { topView = false, stage = 'full' } = options;

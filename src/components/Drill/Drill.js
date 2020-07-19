@@ -9,8 +9,8 @@ function init(algs) {
     algs, // maybe unnecessary
     startMs: null,
     finishedAlgStats: [],
-    remainingAlgs: shuffle(algs)
-  }
+    remainingAlgs: shuffle(algs),
+  };
 }
 
 function reducer(state, action) {
@@ -24,7 +24,7 @@ function reducer(state, action) {
         ...state,
         finishedAlgStats: [...state.finishedAlgStats, { alg, timeMs }],
         startMs: millisecondsNow(),
-        remainingAlgs
+        remainingAlgs,
       };
     case 'reset':
       return init(action.algs);
@@ -44,16 +44,14 @@ function Drill({ algs }) {
   }, []);
   const handleNext = useCallback(() => {
     dispatch({ type: 'next' });
-  } ,[]);
+  }, []);
   const handleReset = useCallback(() => {
     dispatch({ type: 'reset', algs });
   }, [algs]);
 
   return (
     <div style={{ padding: 16, position: 'relative' }}>
-      {!started && (
-        <StartView onStart={handleStart} />
-      )}
+      {!started && <StartView onStart={handleStart} />}
       {started && !finished && (
         <StepView
           finishedCount={state.finishedAlgStats.length}
@@ -63,10 +61,7 @@ function Drill({ algs }) {
         />
       )}
       {finished && (
-        <FinishView
-          algStats={state.finishedAlgStats}
-          onReset={handleReset}
-        />
+        <FinishView algStats={state.finishedAlgStats} onReset={handleReset} />
       )}
     </div>
   );

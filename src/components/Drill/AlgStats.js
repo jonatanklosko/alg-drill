@@ -13,9 +13,7 @@ function AlgStats({ algStats }) {
     <Grid container direction="column" spacing={2}>
       <Grid item container spacing={2}>
         <Grid item>
-          <Typography>
-            Mean: {millisecondsToClockFormat(meanTimeMs)}
-          </Typography>
+          <Typography>Mean: {millisecondsToClockFormat(meanTimeMs)}</Typography>
         </Grid>
         <Grid item>
           <Typography>
@@ -23,7 +21,7 @@ function AlgStats({ algStats }) {
           </Typography>
         </Grid>
       </Grid>
-      {sortedAlgStats.map(algStat => (
+      {sortedAlgStats.map((algStat) => (
         <Grid item>
           <AlgStat algStat={algStat} />
         </Grid>

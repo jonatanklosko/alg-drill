@@ -18,9 +18,7 @@ function StartView({ onStart }) {
   return (
     <Grid container direction="column" alignItems="center" spacing={2}>
       <Grid item>
-        <Typography variant="h5">
-          {`Press space to start`}
-        </Typography>
+        <Typography variant="h5">{`Press space to start`}</Typography>
       </Grid>
       <Grid item>
         <img src={startImg} alt="start" height="300" />

@@ -23,7 +23,7 @@ const stages = [
   { id: 'f2b', name: 'F2B' },
   { id: 'line', name: 'Line' },
   { id: '2x2x2', name: '2x2x2' },
-  { id: '2x2x3', name: '2x2x3' }
+  { id: '2x2x3', name: '2x2x3' },
 ];
 
 export default stages;

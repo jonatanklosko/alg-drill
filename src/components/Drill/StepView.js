@@ -4,7 +4,7 @@ import HelpIcon from '@material-ui/icons/Help';
 import { cubeImageUrl } from '../../lib/url';
 
 function StepView({ onNext, finishedCount, totalCount, currentAlg }) {
-  const progress = Math.round(finishedCount / totalCount * 100);
+  const progress = Math.round((finishedCount / totalCount) * 100);
 
   useEffect(() => {
     function handleKeyDown(event) {
@@ -36,9 +36,7 @@ function StepView({ onNext, finishedCount, totalCount, currentAlg }) {
         </Grid>
         <Grid item>
           <Tooltip
-            title={
-              <Typography variant="subtitle1">{currentAlg}</Typography>
-            }
+            title={<Typography variant="subtitle1">{currentAlg}</Typography>}
           >
             <HelpIcon fontSize="large" />
           </Tooltip>

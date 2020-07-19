@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { Grid, Typography, TextField, Button, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControlLabel,
+  Checkbox,
+} from '@material-ui/core';
 import { parseAlgsText } from '../../lib/alg';
 import stages from '../../lib/stages';
 import { cubeImageUrl } from '../../lib/url';
@@ -30,7 +41,7 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL }) {
       name,
       algs: parseAlgsText(algsText),
       topView,
-      stage
+      stage,
     };
     onSubmit(drill);
   }
@@ -40,16 +51,14 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL }) {
       <form onSubmit={handleSubmit} style={{ minWidth: 500 }}>
         <Grid container direction="column" spacing={2}>
           <Grid item>
-            <Typography variant="h5">
-              {`New drill`}
-            </Typography>
+            <Typography variant="h5">{`New drill`}</Typography>
           </Grid>
           <Grid item>
             <TextField
               fullWidth
               label="Name"
               value={name}
-              onChange={event => setName(event.target.value)}
+              onChange={(event) => setName(event.target.value)}
             />
           </Grid>
           <Grid item>
@@ -60,33 +69,46 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL }) {
               label="Algs"
               helperText="List of all the algorithms, each in a separate line."
               value={algsText}
-              onChange={event => setAlgsText(event.target.value)}
+              onChange={(event) => setAlgsText(event.target.value)}
             />
           </Grid>
           <Grid item>
-            <Typography variant="subtitle2" gutterBottom>Cube preview</Typography>
+            <Typography variant="subtitle2" gutterBottom>
+              Cube preview
+            </Typography>
           </Grid>
           <Grid item>
             <FormControl fullWidth>
               <InputLabel htmlFor="stage">Stage</InputLabel>
               <Select
                 value={stage}
-                onChange={event => setStage(event.target.value)}
+                onChange={(event) => setStage(event.target.value)}
               >
                 {stages.map(({ id, name }) => (
-                  <MenuItem value={id} key={id}>{name}</MenuItem>
+                  <MenuItem value={id} key={id}>
+                    {name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Grid>
           <Grid item>
             <FormControlLabel
-              control={<Checkbox checked={topView} onChange={event => setTopView(event.target.checked)} />}
+              control={
+                <Checkbox
+                  checked={topView}
+                  onChange={(event) => setTopView(event.target.checked)}
+                />
+              }
               label="Top view"
             />
           </Grid>
           <Grid item style={{ textAlign: 'center' }}>
-            <img src={cubeImageUrl("", { stage, topView })} alt="cube preview" height="150" />
+            <img
+              src={cubeImageUrl('', { stage, topView })}
+              alt="cube preview"
+              height="150"
+            />
           </Grid>
           <Grid item>
             <Button

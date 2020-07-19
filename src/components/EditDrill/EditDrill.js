@@ -22,9 +22,7 @@ function EditDrill() {
 
   if (!drill) return <LinearProgress />;
 
-  return (
-    <DrillForm onSubmit={handleSubmit} initial={drill} />
-  );
+  return <DrillForm onSubmit={handleSubmit} initial={drill} />;
 }
 
 export default EditDrill;

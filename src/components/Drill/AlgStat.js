@@ -1,5 +1,11 @@
 import React from 'react';
-import { Card, CardContent, Typography, CardMedia, Grid } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardMedia,
+  Grid,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { cubeImageUrl } from '../../lib/url';
 import { millisecondsToClockFormat } from '../../lib/utils';
@@ -38,9 +44,7 @@ function AlgStat({ algStat }) {
               </Typography>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1">
-                {alg}
-              </Typography>
+              <Typography variant="subtitle1">{alg}</Typography>
             </Grid>
           </Grid>
         </CardContent>

@@ -9,12 +9,10 @@ function NewDrill() {
   function handleSubmit(attrs) {
     createDrill(attrs).then(() => {
       history.push(`/`);
-    })
+    });
   }
 
-  return (
-    <DrillForm onSubmit={handleSubmit} />
-  );
+  return <DrillForm onSubmit={handleSubmit} />;
 }
 
 export default NewDrill;

@@ -14,5 +14,5 @@ export function prettify(string) {
 
 export function parseAlgsText(text) {
   const lines = text.split('\n');
-  return lines.map(prettify).filter(alg => alg);
+  return lines.map(prettify).filter((alg) => alg);
 }
