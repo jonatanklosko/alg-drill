@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import AlgStat from './AlgStat';
-import { mean, millisecondsToClockFormat, sum } from '../lib/utils';
+import { mean, millisecondsToClockFormat, sum } from '../../lib/utils';
 
 function AlgStats({ algStats }) {
   const sortedAlgStats = algStats.sort((x, y) => y.timeMs - x.timeMs);

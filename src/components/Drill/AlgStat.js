@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, CardContent, Typography, CardMedia, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { cubeImageUrl } from '../lib/url';
-import { millisecondsToClockFormat } from '../lib/utils';
+import { cubeImageUrl } from '../../lib/url';
+import { millisecondsToClockFormat } from '../../lib/utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
