@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { LinearProgress } from '@material-ui/core';
 import { getDrill } from '../../lib/database';
 import DrillCore from './DrillCore';
+import { useAsync } from '../../hooks/useAsync';
 
 function Drill() {
   const params = useParams();
   const id = +params.id;
-  const [drill, setDrill] = useState(null);
+  const { pending, value: drill, error } = useAsync(getDrill, [id]);
 
-  useEffect(() => {
-    getDrill(id).then(setDrill);
-  }, [id]);
-
-  if (!drill) return <LinearProgress />;
+  if (pending || !drill) return <LinearProgress />;
+  if (error) return error.message;
 
   return <DrillCore drill={drill} />;
 }
