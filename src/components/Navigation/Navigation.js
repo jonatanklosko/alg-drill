@@ -17,7 +17,7 @@ function Navigation() {
       <Route path="/drills/:id/edit">
         <EditDrill />
       </Route>
-      <Route path="/drill/:id">
+      <Route path="/drills/:id">
         <Drill />
       </Route>
       <Redirect to="/" />
