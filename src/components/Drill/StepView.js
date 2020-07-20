@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { Grid, Typography, Tooltip, LinearProgress } from '@material-ui/core';
-import HelpIcon from '@material-ui/icons/Help';
+import React, { useEffect, useState } from 'react';
+import { Grid, Typography, LinearProgress } from '@material-ui/core';
 import { cubeImageUrl } from '../../lib/url';
 
 function StepView({
@@ -11,6 +10,7 @@ function StepView({
   rotationAndAUF,
   cubeOptions,
 }) {
+  const [showAlg, setShowAlg] = useState(false);
   const progress = Math.round((finishedCount / totalCount) * 100);
 
   useEffect(() => {
@@ -18,12 +18,24 @@ function StepView({
       if (event.key === ' ') {
         event.preventDefault();
         onNext();
+        setShowAlg(false);
       }
     }
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onNext]);
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === 'h') {
+        setShowAlg((show) => !show);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <>
@@ -46,11 +58,7 @@ function StepView({
           />
         </Grid>
         <Grid item>
-          <Tooltip
-            title={<Typography variant="subtitle1">{currentAlg}</Typography>}
-          >
-            <HelpIcon fontSize="large" />
-          </Tooltip>
+          {showAlg && <Typography variant="subtitle1">{currentAlg}</Typography>}
         </Grid>
       </Grid>
     </>

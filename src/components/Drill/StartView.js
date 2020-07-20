@@ -23,6 +23,20 @@ function StartView({ onStart }) {
       <Grid item>
         <img src={startImg} alt="start" height="300" />
       </Grid>
+      <Grid item container spacing={2} justify="center">
+        <Grid item>
+          <Typography variant="caption">
+            <span style={{ fontWeight: 500 }}>Space</span>
+            {` - next`}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant="caption">
+            <span style={{ fontWeight: 500 }}>h</span>
+            {` - show alg`}
+          </Typography>
+        </Grid>
+      </Grid>
     </Grid>
   );
 }
