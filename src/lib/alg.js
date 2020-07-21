@@ -3,7 +3,12 @@ import { sample } from './utils';
 const MOVES_REGEXP = /([RLUDFB]w?|[rludfbMSExyz])2?'?/g;
 
 export function stringToMoves(string) {
-  return (string && string.replace(/\s+/g, '').match(MOVES_REGEXP)) || [];
+  if (!string) return [];
+  const preformatted = string
+    .replace(/\s+/g, '')
+    .replace(/`/g, "'")
+    .replace(/[XYZ]/g, (rotation) => rotation.toLowerCase());
+  return preformatted.match(MOVES_REGEXP) || [];
 }
 
 export function shrink(string) {
