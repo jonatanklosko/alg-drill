@@ -12,21 +12,22 @@ import {
   Checkbox,
 } from '@material-ui/core';
 import { parseAlgsText } from '../../lib/alg';
-import stages from '../../lib/stages';
+import masks from '../../lib/masks';
 import CubeImage from '../CubeImage/CubeImage';
 
 const DEFAULT_INITIAL = {
   name: '',
   algs: [],
-  topView: false,
-  stage: 'full',
+  planView: false,
+  mask: null,
 };
 
-function DrillForm({ onSubmit, initial = DEFAULT_INITIAL, title = 'Drill' }) {
+function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
+  initial = { ...DEFAULT_INITIAL, ...initial };
   const [name, setName] = useState(initial.name);
   const [algsText, setAlgsText] = useState(initial.algs.join('\n'));
-  const [topView, setTopView] = useState(initial.topView);
-  const [stage, setStage] = useState(initial.stage);
+  const [planView, setPlanView] = useState(initial.planView);
+  const [mask, setMask] = useState(initial.mask);
 
   function isValid() {
     if (!name) return false;
@@ -40,8 +41,8 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL, title = 'Drill' }) {
     const drill = {
       name,
       algs: parseAlgsText(algsText),
-      topView,
-      stage,
+      planView,
+      mask,
     };
     onSubmit(drill);
   }
@@ -79,12 +80,16 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL, title = 'Drill' }) {
           </Grid>
           <Grid item>
             <FormControl fullWidth>
-              <InputLabel htmlFor="stage">Stage</InputLabel>
+              <InputLabel htmlFor="mask">Mask</InputLabel>
               <Select
-                value={stage}
-                onChange={(event) => setStage(event.target.value)}
+                value={mask === null ? 'none' : mask}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setMask(value === 'none' ? null : value);
+                }}
               >
-                {stages.map(({ id, name }) => (
+                <MenuItem value="none">None</MenuItem>
+                {masks.map(({ id, name }) => (
                   <MenuItem value={id} key={id}>
                     {name}
                   </MenuItem>
@@ -96,15 +101,15 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL, title = 'Drill' }) {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={topView}
-                  onChange={(event) => setTopView(event.target.checked)}
+                  checked={planView}
+                  onChange={(event) => setPlanView(event.target.checked)}
                 />
               }
-              label="Top view"
+              label="Plan view"
             />
           </Grid>
           <Grid item style={{ textAlign: 'center' }}>
-            <CubeImage topView={topView} stage={stage} />
+            <CubeImage planView={planView} mask={mask} />
           </Grid>
           <Grid item>
             <Button

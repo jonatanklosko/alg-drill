@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AlgStat({ algStat, cubeOptions }) {
+function AlgStat({ algStat, CubeImageProps }) {
   const classes = useStyles();
   const { alg, timeMs } = algStat;
 
   return (
     <Card className={classes.root}>
-      <CubeImage alg={alg} size={150} {...cubeOptions} />
+      <CubeImage alg={alg} size={150} {...CubeImageProps} />
       <div className={classes.contentWrapper}>
         <CardContent className={classes.content}>
           <Grid container spacing={1} direction="column">

@@ -3,7 +3,7 @@ import { Grid, Button, Tooltip } from '@material-ui/core';
 import AlgStats from './AlgStats';
 import { mean } from '../../lib/utils';
 
-function FinishView({ onRepeatAlgs, algStats, cubeOptions }) {
+function FinishView({ onRepeatAlgs, algStats, CubeImageProps }) {
   const algs = algStats.map(({ alg }) => alg);
 
   const timesMs = algStats.map(({ timeMs }) => timeMs);
@@ -36,7 +36,7 @@ function FinishView({ onRepeatAlgs, algStats, cubeOptions }) {
         </Grid>
       </Grid>
       <Grid item>
-        <AlgStats algStats={algStats} cubeOptions={cubeOptions} />
+        <AlgStats algStats={algStats} CubeImageProps={CubeImageProps} />
       </Grid>
     </Grid>
   );

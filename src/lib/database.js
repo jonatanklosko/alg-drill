@@ -4,8 +4,8 @@ const DATABASE_NAME = 'alg-drill';
 
 const db = new Dexie(DATABASE_NAME);
 
-db.version(1).stores({
-  drills: `++id,name,algs,topView,stage`,
+db.version(2).stores({
+  drills: `++id,name,algs,planView,mask`,
 });
 
 export async function getDrills() {

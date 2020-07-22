@@ -37,7 +37,7 @@ function reducer(state, action) {
 
 function DrillCore({ drill }) {
   const [state, dispatch] = useReducer(reducer, drill.algs, init);
-  const cubeOptions = { planView: drill.topView, stage: drill.stage };
+  const CubeImageProps = { planView: drill.planView, mask: drill.mask };
 
   const started = state.startMs !== null;
   const finished = state.remainingAlgs.length === 0;
@@ -65,7 +65,7 @@ function DrillCore({ drill }) {
           }
           currentAlg={state.remainingAlgs[0]}
           rotationAndAUF={state.rotationAndAUF}
-          cubeOptions={cubeOptions}
+          CubeImageProps={CubeImageProps}
           onNext={handleNext}
         />
       )}
@@ -73,7 +73,7 @@ function DrillCore({ drill }) {
         <FinishView
           algStats={state.finishedAlgStats}
           onRepeatAlgs={handleRepeatAlgs}
-          cubeOptions={cubeOptions}
+          CubeImageProps={CubeImageProps}
         />
       )}
     </div>

@@ -1,5 +1,4 @@
-const stages = [
-  { id: 'full', name: 'Full' },
+const masks = [
   { id: 'fl', name: 'FL' },
   { id: 'f2l', name: 'F2L' },
   { id: 'll', name: 'LL' },
@@ -23,4 +22,4 @@ const stages = [
   { id: 'f2b', name: 'F2B' },
 ];
 
-export default stages;
+export default masks;
