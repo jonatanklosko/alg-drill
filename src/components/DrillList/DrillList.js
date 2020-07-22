@@ -24,7 +24,12 @@ function DrillList({ drills, onDeleted }) {
   return (
     <List>
       {drills.map((drill) => (
-        <ListItem button component={RouterLink} to={`/drills/${drill.id}`}>
+        <ListItem
+          key={drill.id}
+          button
+          component={RouterLink}
+          to={`/drills/${drill.id}`}
+        >
           <ListItemText
             primary={drill.name}
             secondary={`${drill.algs.length} algs`}

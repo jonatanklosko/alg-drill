@@ -37,7 +37,7 @@ function reducer(state, action) {
 
 function DrillCore({ drill }) {
   const [state, dispatch] = useReducer(reducer, drill.algs, init);
-  const cubeOptions = { topView: drill.topView, stage: drill.stage };
+  const cubeOptions = { planView: drill.topView, stage: drill.stage };
 
   const started = state.startMs !== null;
   const finished = state.remainingAlgs.length === 0;

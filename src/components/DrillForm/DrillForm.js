@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { parseAlgsText } from '../../lib/alg';
 import stages from '../../lib/stages';
-import { cubeImageUrl } from '../../lib/url';
+import CubeImage from '../CubeImage/CubeImage';
 
 const DEFAULT_INITIAL = {
   name: '',
@@ -104,11 +104,7 @@ function DrillForm({ onSubmit, initial = DEFAULT_INITIAL, title = 'Drill' }) {
             />
           </Grid>
           <Grid item style={{ textAlign: 'center' }}>
-            <img
-              src={cubeImageUrl('', { stage, topView })}
-              alt="cube preview"
-              height="150"
-            />
+            <CubeImage topView={topView} stage={stage} />
           </Grid>
           <Grid item>
             <Button

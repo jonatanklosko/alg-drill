@@ -21,9 +21,6 @@ const stages = [
   { id: 'f2l_sm', name: 'F2L-2 Nonadjacent' },
   { id: 'f2l_1', name: 'F2L-1' },
   { id: 'f2b', name: 'F2B' },
-  { id: 'line', name: 'Line' },
-  { id: '2x2x2', name: '2x2x2' },
-  { id: '2x2x3', name: '2x2x3' },
 ];
 
 export default stages;

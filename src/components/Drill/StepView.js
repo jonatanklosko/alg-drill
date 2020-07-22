@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Typography, LinearProgress } from '@material-ui/core';
-import { cubeImageUrl } from '../../lib/url';
+import CubeImage from '../CubeImage/CubeImage';
 
 function StepView({
   onNext,
@@ -51,10 +51,10 @@ function StepView({
           </Typography>
         </Grid>
         <Grid item>
-          <img
-            src={cubeImageUrl(currentAlg + rotationAndAUF, cubeOptions)}
-            alt="Cube"
-            height="300"
+          <CubeImage
+            alg={currentAlg + rotationAndAUF}
+            size={300}
+            {...cubeOptions}
           />
         </Grid>
         <Grid item>

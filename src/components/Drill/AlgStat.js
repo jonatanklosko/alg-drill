@@ -1,22 +1,12 @@
 import React from 'react';
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardMedia,
-  Grid,
-} from '@material-ui/core';
+import { Card, CardContent, Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { cubeImageUrl } from '../../lib/url';
 import { millisecondsToClockFormat } from '../../lib/utils';
+import CubeImage from '../CubeImage/CubeImage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-  },
-  cubeImage: {
-    minHeight: 150,
-    minWidth: 150,
   },
   contentWrapper: {
     display: 'flex',
@@ -30,11 +20,10 @@ const useStyles = makeStyles((theme) => ({
 function AlgStat({ algStat, cubeOptions }) {
   const classes = useStyles();
   const { alg, timeMs } = algStat;
-  const imageUrl = cubeImageUrl(alg, cubeOptions);
 
   return (
     <Card className={classes.root}>
-      {imageUrl && <CardMedia className={classes.cubeImage} image={imageUrl} />}
+      <CubeImage alg={alg} size={150} {...cubeOptions} />
       <div className={classes.contentWrapper}>
         <CardContent className={classes.content}>
           <Grid container spacing={1} direction="column">
