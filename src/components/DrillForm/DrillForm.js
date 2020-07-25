@@ -67,6 +67,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
           </Grid>
           <Grid item>
             <TextField
+              spellCheck={false}
               fullWidth
               multiline
               rowsMax={10}
