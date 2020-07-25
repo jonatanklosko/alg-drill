@@ -7,7 +7,7 @@ function StepView({
   finishedCount,
   totalCount,
   currentAlg,
-  rotationAndAUF,
+  aufAndRotation,
   CubeImageProps,
 }) {
   const [showAlg, setShowAlg] = useState(false);
@@ -52,7 +52,7 @@ function StepView({
         </Grid>
         <Grid item>
           <CubeImage
-            alg={currentAlg + rotationAndAUF}
+            alg={currentAlg + aufAndRotation}
             size={300}
             {...CubeImageProps}
           />

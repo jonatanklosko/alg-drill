@@ -3,14 +3,15 @@ import { shuffle, millisecondsNow } from '../../lib/utils';
 import FinishView from './FinishView';
 import StartView from './StartView';
 import StepView from './StepView';
-import { randomRotationAndAUF } from '../../lib/alg';
+import { randomAufAndRotation } from '../../lib/alg';
 
-function init(algs) {
+function init({ algs, colorNeutral }) {
   return {
     startMs: null,
     finishedAlgStats: [],
     remainingAlgs: shuffle(algs),
-    rotationAndAUF: randomRotationAndAUF(),
+    aufAndRotation: randomAufAndRotation(colorNeutral),
+    colorNeutral,
   };
 }
 
@@ -26,17 +27,21 @@ function reducer(state, action) {
         finishedAlgStats: [...state.finishedAlgStats, { alg, timeMs }],
         startMs: millisecondsNow(),
         remainingAlgs,
-        rotationAndAUF: randomRotationAndAUF(),
+        aufAndRotation: randomAufAndRotation(state.colorNeutral),
       };
     case 'reset':
-      return init(action.algs);
+      return init({ algs: action.algs, colorNeutral: state.colorNeutral });
     default:
       throw new Error();
   }
 }
 
 function DrillCore({ drill }) {
-  const [state, dispatch] = useReducer(reducer, drill.algs, init);
+  const [state, dispatch] = useReducer(
+    reducer,
+    { algs: drill.algs, colorNeutral: drill.colorNeutral },
+    init
+  );
   const CubeImageProps = { planView: drill.planView, mask: drill.mask };
 
   const started = state.startMs !== null;
@@ -64,7 +69,7 @@ function DrillCore({ drill }) {
             state.finishedAlgStats.length + state.remainingAlgs.length
           }
           currentAlg={state.remainingAlgs[0]}
-          rotationAndAUF={state.rotationAndAUF}
+          aufAndRotation={state.aufAndRotation}
           CubeImageProps={CubeImageProps}
           onNext={handleNext}
         />

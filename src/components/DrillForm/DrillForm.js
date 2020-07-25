@@ -19,6 +19,7 @@ const DEFAULT_INITIAL = {
   name: '',
   algs: [],
   planView: false,
+  colorNeutral: false,
   mask: null,
 };
 
@@ -27,6 +28,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
   const [name, setName] = useState(initial.name);
   const [algsText, setAlgsText] = useState(initial.algs.join('\n'));
   const [planView, setPlanView] = useState(initial.planView);
+  const [colorNeutral, setColorNeutral] = useState(initial.colorNeutral);
   const [mask, setMask] = useState(initial.mask);
 
   function isValid() {
@@ -43,6 +45,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
       algs: parseAlgsText(algsText),
       planView,
       mask,
+      colorNeutral,
     };
     onSubmit(drill);
   }
@@ -71,6 +74,17 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
               helperText="List of all the algorithms, each in a separate line."
               value={algsText}
               onChange={(event) => setAlgsText(event.target.value)}
+            />
+          </Grid>
+          <Grid item>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={colorNeutral}
+                  onChange={(event) => setColorNeutral(event.target.checked)}
+                />
+              }
+              label="Color neutral"
             />
           </Grid>
           <Grid item>

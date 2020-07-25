@@ -24,8 +24,37 @@ export function parseAlgsText(text) {
   return lines.map(prettify).filter((alg) => alg);
 }
 
-export function randomRotationAndAUF() {
-  const rotation = sample(['', 'y', 'y2', "y'"]);
+const ALL_ROTATIONS = [
+  '',
+  'y',
+  'y2',
+  "y'",
+  'z2',
+  'z2 y',
+  'z2 y2',
+  "z2 y'",
+  'z',
+  'z y',
+  'z y2',
+  "z y'",
+  "z'",
+  "z' y",
+  "z' y2",
+  "z' y'",
+  'x',
+  'x y',
+  'x y2',
+  "x y'",
+  "x'",
+  "x' y",
+  "x' y2",
+  "x' y'",
+];
+
+const YELLOW_ROTATIONS = ['', 'y', 'y2', "y'"];
+
+export function randomAufAndRotation(colorNeutral) {
+  const rotation = sample(colorNeutral ? ALL_ROTATIONS : YELLOW_ROTATIONS);
   const auf = sample(['', 'U', 'U2', "U'"]);
-  return `${rotation} ${auf}`;
+  return `${auf} ${rotation}`;
 }
