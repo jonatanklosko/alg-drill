@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
+import { persistStorage } from './lib/database';
+
+persistStorage();
 
 ReactDOM.render(
   <React.StrictMode>

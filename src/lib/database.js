@@ -8,6 +8,22 @@ db.version(3).stores({
   drills: `++id,name,algs,planView,mask,colorNeutral`,
 });
 
+/**
+ * Tries to convert to persisted storage.
+ *
+ * See https://dexie.org/docs/StorageManager
+ *
+ * @returns {Promise<boolean>} Promise resolved with true if successfully
+ * persisted the storage, false if not, and undefined if the API is not present.
+ */
+export async function persistStorage() {
+  if (navigator.storage && navigator.storage.persist) {
+    return await navigator.storage.persist();
+  } else {
+    return undefined;
+  }
+}
+
 export async function getDrills() {
   return await db.drills.toArray();
 }
