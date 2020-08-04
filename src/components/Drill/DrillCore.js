@@ -1,17 +1,22 @@
 import React, { useReducer, useCallback } from 'react';
-import { shuffle, millisecondsNow } from '../../lib/utils';
+import { shuffle, millisecondsNow, sample } from '../../lib/utils';
 import FinishView from './FinishView';
 import StartView from './StartView';
 import StepView from './StepView';
-import { randomAufAndRotation } from '../../lib/alg';
+import {
+  randomAufAndRotation,
+  addPreRotation,
+  combineMoves,
+} from '../../lib/alg';
 
-function init({ algs, colorNeutral }) {
+function init({ drill, algs }) {
   return {
+    drill,
     startMs: null,
     finishedAlgStats: [],
     remainingAlgs: shuffle(algs),
-    aufAndRotation: randomAufAndRotation(colorNeutral),
-    colorNeutral,
+    angle: sample(drill.angles),
+    aufAndRotation: randomAufAndRotation(drill.colorNeutral),
   };
 }
 
@@ -27,10 +32,14 @@ function reducer(state, action) {
         finishedAlgStats: [...state.finishedAlgStats, { alg, timeMs }],
         startMs: millisecondsNow(),
         remainingAlgs,
-        aufAndRotation: randomAufAndRotation(state.colorNeutral),
+        angle: sample(state.drill.angles),
+        aufAndRotation: randomAufAndRotation(state.drill.colorNeutral),
       };
     case 'reset':
-      return init({ algs: action.algs, colorNeutral: state.colorNeutral });
+      return init({ algs: action.algs, drill: state.drill });
+    case 'rotation':
+      const angle = combineMoves(state.angle, action.rotation);
+      return { ...state, angle };
     default:
       throw new Error();
   }
@@ -39,7 +48,7 @@ function reducer(state, action) {
 function DrillCore({ drill }) {
   const [state, dispatch] = useReducer(
     reducer,
-    { algs: drill.algs, colorNeutral: drill.colorNeutral },
+    { drill, algs: drill.algs },
     init
   );
   const CubeImageProps = { planView: drill.planView, mask: drill.mask };
@@ -55,6 +64,10 @@ function DrillCore({ drill }) {
     dispatch({ type: 'next' });
   }, []);
 
+  const handleRotation = useCallback((rotation) => {
+    dispatch({ type: 'rotation', rotation });
+  }, []);
+
   const handleRepeatAlgs = useCallback((algs) => {
     dispatch({ type: 'reset', algs });
   }, []);
@@ -68,10 +81,11 @@ function DrillCore({ drill }) {
           totalCount={
             state.finishedAlgStats.length + state.remainingAlgs.length
           }
-          currentAlg={state.remainingAlgs[0]}
+          currentAlg={addPreRotation(state.remainingAlgs[0], state.angle)}
           aufAndRotation={state.aufAndRotation}
           CubeImageProps={CubeImageProps}
           onNext={handleNext}
+          onRotation={handleRotation}
         />
       )}
       {finished && (

@@ -31,3 +31,11 @@ export function sample(xs) {
   const index = Math.floor(Math.random() * xs.length);
   return xs[index];
 }
+
+export function toggleElement(xs, x) {
+  if (xs.includes(x)) {
+    return xs.filter((y) => y !== x);
+  } else {
+    return [...xs, x];
+  }
+}

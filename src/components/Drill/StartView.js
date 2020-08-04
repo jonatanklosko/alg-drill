@@ -36,6 +36,12 @@ function StartView({ onStart }) {
             {` - show alg`}
           </Typography>
         </Grid>
+        <Grid item>
+          <Typography variant="caption">
+            <span style={{ fontWeight: 500 }}>Right/Left</span>
+            {` - rotate`}
+          </Typography>
+        </Grid>
       </Grid>
     </Grid>
   );

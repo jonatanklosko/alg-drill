@@ -4,6 +4,7 @@ import CubeImage from '../CubeImage/CubeImage';
 
 function StepView({
   onNext,
+  onRotation,
   finishedCount,
   totalCount,
   currentAlg,
@@ -36,6 +37,22 @@ function StepView({
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        onRotation("y'");
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        onRotation('y');
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [onRotation]);
 
   return (
     <>

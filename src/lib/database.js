@@ -8,6 +8,14 @@ db.version(3).stores({
   drills: `++id,name,algs,planView,mask,colorNeutral`,
 });
 
+db.version(4)
+  .stores({
+    drills: `++id,name,algs,planView,mask,colorNeutral,angles`,
+  })
+  .upgrade((tx) => {
+    tx.drills.toCollection().modify({ angles: [''] });
+  });
+
 /**
  * Tries to convert to persisted storage.
  *
