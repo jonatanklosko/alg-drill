@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, Typography, LinearProgress } from '@material-ui/core';
 import CubeImage from '../CubeImage/CubeImage';
+import { useEventListener } from '../../hooks/useEventListener';
 
 function StepView({
   onNext,
@@ -14,45 +15,34 @@ function StepView({
   const [showAlg, setShowAlg] = useState(false);
   const progress = Math.round((finishedCount / totalCount) * 100);
 
-  useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.key === ' ') {
-        event.preventDefault();
-        onNext();
-        setShowAlg(false);
-      }
+  function handleNext() {
+    setShowAlg(false);
+    onNext();
+  }
+
+  useEventListener('keydown', (event) => {
+    if (event.key === ' ') {
+      event.preventDefault();
+      handleNext();
     }
+  });
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [onNext]);
+  useEventListener('touchend', (event) => {
+    event.preventDefault();
+    handleNext();
+  });
 
-  useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.key === 'h') {
-        setShowAlg((show) => !show);
-      }
+  useEventListener('keydown', (event) => {
+    if (event.key === 'h') {
+      setShowAlg((show) => !show);
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      onRotation("y'");
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      onRotation('y');
     }
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.key === 'ArrowRight') {
-        event.preventDefault();
-        onRotation("y'");
-      }
-      if (event.key === 'ArrowLeft') {
-        event.preventDefault();
-        onRotation('y');
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [onRotation]);
+  });
 
   return (
     <>
