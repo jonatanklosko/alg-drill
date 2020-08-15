@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link, Typography, Grid } from '@material-ui/core';
+import { Link, Typography, Grid, Hidden } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { red } from '@material-ui/core/colors';
 
@@ -34,19 +34,21 @@ function Layout({ children }) {
       <div className={classes.content}>{children}</div>
       <div className={classes.footer}>
         <Grid container spacing={2}>
-          <Grid item>
-            <Typography variant="body2">
-              Made with <FavoriteIcon className={classes.heartIcon} /> by{' '}
-              <Link
-                className={classes.link}
-                href="https://github.com/jonatanklosko"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Jonatan Kłosko
-              </Link>
-            </Typography>
-          </Grid>
+          <Hidden xsDown>
+            <Grid item>
+              <Typography variant="body2">
+                Made with <FavoriteIcon className={classes.heartIcon} /> by{' '}
+                <Link
+                  className={classes.link}
+                  href="https://github.com/jonatanklosko"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Jonatan Kłosko
+                </Link>
+              </Typography>
+            </Grid>
+          </Hidden>
           <Grid item className={classes.grow} />
           <Grid item>
             <Link component={RouterLink} to="/">
