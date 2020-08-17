@@ -1,7 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import { cubeSVG } from 'sr-visualizer';
 
-function CubeImage({ alg = null, size = 150, planView = false, mask = null }) {
+function CubeImage({
+  apply = null,
+  size = 150,
+  planView = false,
+  mask = null,
+}) {
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -20,9 +25,9 @@ function CubeImage({ alg = null, size = 150, planView = false, mask = null }) {
       ],
       view: planView ? 'plan' : undefined,
       mask: mask,
-      case: alg,
+      algorithm: apply,
     });
-  }, [alg, size, planView, mask]);
+  }, [apply, size, planView, mask]);
 
   return <div ref={rootRef} />;
 }

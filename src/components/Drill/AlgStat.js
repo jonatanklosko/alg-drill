@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { millisecondsToClockFormat } from '../../lib/utils';
 import CubeImage from '../CubeImage/CubeImage';
+import { invert } from '../../lib/alg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +24,7 @@ function AlgStat({ algStat, CubeImageProps }) {
 
   return (
     <Card className={classes.root}>
-      <CubeImage alg={alg} size={150} {...CubeImageProps} />
+      <CubeImage apply={invert(alg)} size={150} {...CubeImageProps} />
       <div className={classes.contentWrapper}>
         <CardContent className={classes.content}>
           <Grid container spacing={1} direction="column">

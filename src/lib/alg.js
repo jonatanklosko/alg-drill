@@ -24,39 +24,25 @@ export function parseAlgsText(text) {
   return lines.map(prettify).filter((alg) => alg);
 }
 
-const ALL_ROTATIONS = [
-  '',
-  'y',
-  'y2',
-  "y'",
-  'z2',
-  'z2 y',
-  'z2 y2',
-  "z2 y'",
-  'z',
-  'z y',
-  'z y2',
-  "z y'",
-  "z'",
-  "z' y",
-  "z' y2",
-  "z' y'",
-  'x',
-  'x y',
-  'x y2',
-  "x y'",
-  "x'",
-  "x' y",
-  "x' y2",
-  "x' y'",
-];
+export function invert(string) {
+  return stringToMoves(string).map(invertMove).reverse().join(' ');
+}
+
+function invertMove(move) {
+  if (move.match(/(2|')$/)) {
+    return move.replace("'", '');
+  } else {
+    return move + "'";
+  }
+}
 
 const HORIZONTAL_ROTATIONS = ['', 'y', 'y2', "y'"];
+const AUFS = ['', 'U', 'U2', "U'"];
 
-export function randomAufAndRotation(colorNeutral) {
-  const rotation = sample(colorNeutral ? ALL_ROTATIONS : HORIZONTAL_ROTATIONS);
-  const auf = sample(['', 'U', 'U2', "U'"]);
-  return `${auf} ${rotation}`;
+export function randomRotationAndAuf(allowedOrientations) {
+  const rotation = sample(allowedOrientations) + sample(HORIZONTAL_ROTATIONS);
+  const auf = sample(AUFS);
+  return `${rotation} ${auf}`;
 }
 
 export function addPreRotation(alg, rotation) {

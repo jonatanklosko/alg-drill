@@ -16,6 +16,22 @@ db.version(4)
     tx.drills.toCollection().modify({ angles: [''] });
   });
 
+db.version(5)
+  .stores({
+    drills: `++id,name,algs,planView,mask,allowedOrientations,angles`,
+  })
+  .upgrade((tx) => {
+    tx.drills.toCollection().modify((drill) => {
+      if (drill.colorNeutral) {
+        drill.allowedOrientations = ['', 'z2', "x'", 'x', "z'", 'z'];
+      } else {
+        drill.allowedOrientations = [''];
+      }
+
+      delete drill.colorNeutral;
+    });
+  });
+
 /**
  * Tries to convert to persisted storage.
  *

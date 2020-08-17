@@ -32,7 +32,7 @@ const DEFAULT_INITIAL = {
   name: '',
   algs: [],
   planView: false,
-  colorNeutral: false,
+  allowedOrientations: [''],
   angles: [''],
   mask: null,
 };
@@ -45,7 +45,9 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
   const [name, setName] = useState(initial.name);
   const [algsText, setAlgsText] = useState(initial.algs.join('\n'));
   const [planView, setPlanView] = useState(initial.planView);
-  const [colorNeutral, setColorNeutral] = useState(initial.colorNeutral);
+  const [allowedOrientations, setAllowedOrientations] = useState(
+    initial.allowedOrientations
+  );
   const [angles, setAngles] = useState(initial.angles);
   const [mask, setMask] = useState(initial.mask);
 
@@ -53,6 +55,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
     if (!name) return false;
     const algs = parseAlgsText(algsText);
     if (algs.length === 0) return false;
+    if (allowedOrientations.length === 0) return false;
     if (angles.length === 0) return false;
     return true;
   }
@@ -64,7 +67,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
       algs: parseAlgsText(algsText),
       planView,
       mask,
-      colorNeutral,
+      allowedOrientations,
       angles,
     };
     onSubmit(drill);
@@ -98,28 +101,47 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
             />
           </Grid>
           <Grid item>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={colorNeutral}
-                  onChange={(event) => setColorNeutral(event.target.checked)}
-                />
-              }
-              label="Color neutral"
-            />
+            <Typography variant="subtitle2" gutterBottom>
+              Allowed orientations
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              Every alg will be shown with either of the selected centers on the
+              top (randomly). Use this to practice color neutral or color
+              specific recognition.
+            </Typography>
+            {[
+              { label: 'Yellow', value: '' },
+              { label: 'White', value: 'z2' },
+              { label: 'Green', value: "x'" },
+              { label: 'Blue', value: 'x' },
+              { label: 'Red', value: "z'" },
+              { label: 'Orange', value: 'z' },
+            ].map(({ label, value }) => (
+              <FormControlLabel
+                key={value}
+                control={
+                  <Checkbox
+                    checked={allowedOrientations.includes(value)}
+                    onChange={(event) =>
+                      setAllowedOrientations(
+                        toggleElement(allowedOrientations, value)
+                      )
+                    }
+                  />
+                }
+                label={label}
+              />
+            ))}
           </Grid>
           <Grid item>
             <Typography variant="subtitle2" gutterBottom>
               Angles
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="body2" gutterBottom>
               Every alg will be shown from either of the selected angles
               (randomly). Use this to easily translate all the algs to a
-              different angle or even train recognition from regardless the
-              angle.
+              different angle or even practice recognition regardless the angle.
             </Typography>
-          </Grid>
-          <Grid item>
             {[
               { label: '0°', value: '' },
               { label: '90° (y)', value: 'y' },

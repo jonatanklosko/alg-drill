@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Grid, Typography, LinearProgress } from '@material-ui/core';
 import CubeImage from '../CubeImage/CubeImage';
 import { useEventListener } from '../../hooks/useEventListener';
+import { invert } from '../../lib/alg';
 
 function StepView({
   onNext,
@@ -9,7 +10,7 @@ function StepView({
   finishedCount,
   totalCount,
   currentAlg,
-  aufAndRotation,
+  rotationAndAuf,
   CubeImageProps,
 }) {
   const [showAlg, setShowAlg] = useState(false);
@@ -59,7 +60,7 @@ function StepView({
         </Grid>
         <Grid item>
           <CubeImage
-            alg={currentAlg + aufAndRotation}
+            apply={rotationAndAuf + invert(currentAlg)}
             size={300}
             {...CubeImageProps}
           />

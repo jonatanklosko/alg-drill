@@ -4,7 +4,7 @@ import FinishView from './FinishView';
 import StartView from './StartView';
 import StepView from './StepView';
 import {
-  randomAufAndRotation,
+  randomRotationAndAuf,
   addPreRotation,
   combineMoves,
 } from '../../lib/alg';
@@ -16,7 +16,7 @@ function init({ drill, algs }) {
     finishedAlgStats: [],
     remainingAlgs: shuffle(algs),
     angle: sample(drill.angles),
-    aufAndRotation: randomAufAndRotation(drill.colorNeutral),
+    rotationAndAuf: randomRotationAndAuf(drill.allowedOrientations),
   };
 }
 
@@ -33,7 +33,7 @@ function reducer(state, action) {
         startMs: millisecondsNow(),
         remainingAlgs,
         angle: sample(state.drill.angles),
-        aufAndRotation: randomAufAndRotation(state.drill.colorNeutral),
+        rotationAndAuf: randomRotationAndAuf(state.drill.allowedOrientations),
       };
     case 'reset':
       return init({ algs: action.algs, drill: state.drill });
@@ -82,7 +82,7 @@ function DrillCore({ drill }) {
             state.finishedAlgStats.length + state.remainingAlgs.length
           }
           currentAlg={addPreRotation(state.remainingAlgs[0], state.angle)}
-          aufAndRotation={state.aufAndRotation}
+          rotationAndAuf={state.rotationAndAuf}
           CubeImageProps={CubeImageProps}
           onNext={handleNext}
           onRotation={handleRotation}
