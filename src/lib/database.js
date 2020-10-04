@@ -32,6 +32,14 @@ db.version(5)
     });
   });
 
+db.version(6)
+  .stores({
+    drills: `++id,name,algs,planView,mask,allowedOrientations,angles,lefty`,
+  })
+  .upgrade((tx) => {
+    tx.drills.toCollection().modify({ lefty: false });
+  });
+
 /**
  * Tries to convert to persisted storage.
  *

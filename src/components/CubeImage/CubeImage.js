@@ -6,6 +6,7 @@ function CubeImage({
   size = 150,
   planView = false,
   mask = null,
+  lefty = false,
 }) {
   const rootRef = useRef(null);
 
@@ -19,15 +20,20 @@ function CubeImage({
     cubeSVG(rootRef.current, {
       height: size,
       width: size,
-      viewportRotations: [
-        [1, 34],
-        [0, -34],
-      ],
+      viewportRotations: !lefty
+        ? [
+            [1, 34],
+            [0, -34],
+          ]
+        : [
+            [1, -34],
+            [0, -34],
+          ],
       view: planView ? 'plan' : undefined,
       mask: mask,
       algorithm: apply,
     });
-  }, [apply, size, planView, mask]);
+  }, [apply, size, planView, mask, lefty]);
 
   return <div ref={rootRef} />;
 }

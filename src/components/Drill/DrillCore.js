@@ -51,7 +51,11 @@ function DrillCore({ drill }) {
     { drill, algs: drill.algs },
     init
   );
-  const CubeImageProps = { planView: drill.planView, mask: drill.mask };
+  const CubeImageProps = {
+    planView: drill.planView,
+    mask: drill.mask,
+    lefty: drill.lefty,
+  };
 
   const started = state.startMs !== null;
   const finished = state.remainingAlgs.length === 0;

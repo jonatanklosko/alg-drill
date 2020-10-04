@@ -32,6 +32,7 @@ const DEFAULT_INITIAL = {
   name: '',
   algs: [],
   planView: false,
+  lefty: false,
   allowedOrientations: [''],
   angles: [''],
   mask: null,
@@ -45,6 +46,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
   const [name, setName] = useState(initial.name);
   const [algsText, setAlgsText] = useState(initial.algs.join('\n'));
   const [planView, setPlanView] = useState(initial.planView);
+  const [lefty, setLefty] = useState(initial.lefty);
   const [allowedOrientations, setAllowedOrientations] = useState(
     initial.allowedOrientations
   );
@@ -66,6 +68,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
       name,
       algs: parseAlgsText(algsText),
       planView,
+      lefty,
       mask,
       allowedOrientations,
       angles,
@@ -199,9 +202,18 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
               }
               label="Plan view"
             />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={lefty}
+                  onChange={(event) => setLefty(event.target.checked)}
+                />
+              }
+              label="Left-handed"
+            />
           </Grid>
           <Grid item style={{ textAlign: 'center' }}>
-            <CubeImage planView={planView} mask={mask} />
+            <CubeImage planView={planView} mask={mask} lefty={lefty} />
           </Grid>
           <Grid item>
             <Button
