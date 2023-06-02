@@ -77,7 +77,15 @@ function DrillCore({ drill }) {
   }, []);
 
   return (
-    <div style={{ padding: 16, position: 'relative' }}>
+    <div
+      style={{
+        padding: 16,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+      }}
+    >
       {!started && <StartView onStart={handleStart} />}
       {started && !finished && (
         <StepView

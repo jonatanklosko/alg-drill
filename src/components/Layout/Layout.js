@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
   },
   footer: {
     padding: theme.spacing(2),
