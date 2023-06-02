@@ -16,7 +16,10 @@ function init({ drill, algs }) {
     finishedAlgStats: [],
     remainingAlgs: shuffle(algs),
     angle: sample(drill.angles),
-    rotationAndAuf: randomRotationAndAuf(drill.allowedOrientations),
+    rotationAndAuf: randomRotationAndAuf(
+      drill.allowedOrientations,
+      drill.randomizeAuf
+    ),
   };
 }
 
@@ -33,7 +36,10 @@ function reducer(state, action) {
         startMs: millisecondsNow(),
         remainingAlgs,
         angle: sample(state.drill.angles),
-        rotationAndAuf: randomRotationAndAuf(state.drill.allowedOrientations),
+        rotationAndAuf: randomRotationAndAuf(
+          state.drill.allowedOrientations,
+          state.drill.randomizeAuf
+        ),
       };
     case 'reset':
       return init({ algs: action.algs, drill: state.drill });

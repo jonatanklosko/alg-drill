@@ -39,10 +39,15 @@ function invertMove(move) {
 const HORIZONTAL_ROTATIONS = ['', 'y', 'y2', "y'"];
 const AUFS = ['', 'U', 'U2', "U'"];
 
-export function randomRotationAndAuf(allowedOrientations) {
+export function randomRotationAndAuf(allowedOrientations, randomizeAuf) {
   const rotation = sample(allowedOrientations) + sample(HORIZONTAL_ROTATIONS);
-  const auf = sample(AUFS);
-  return `${rotation} ${auf}`;
+
+  if (randomizeAuf) {
+    const auf = sample(AUFS);
+    return `${rotation} ${auf}`;
+  } else {
+    return rotation;
+  }
 }
 
 export function addPreRotation(alg, rotation) {

@@ -40,6 +40,14 @@ db.version(6)
     tx.drills.toCollection().modify({ lefty: false });
   });
 
+db.version(7)
+  .stores({
+    drills: `++id,name,algs,planView,mask,allowedOrientations,angles,randomizeAuf,lefty`,
+  })
+  .upgrade((tx) => {
+    tx.drills.toCollection().modify({ randomizeAuf: true });
+  });
+
 /**
  * Tries to convert to persisted storage.
  *

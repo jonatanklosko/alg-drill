@@ -35,6 +35,7 @@ const DEFAULT_INITIAL = {
   lefty: false,
   allowedOrientations: [''],
   angles: [''],
+  randomizeAuf: true,
   mask: null,
 };
 
@@ -51,6 +52,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
     initial.allowedOrientations
   );
   const [angles, setAngles] = useState(initial.angles);
+  const [randomizeAuf, setRandomizeAuf] = useState(initial.randomizeAuf);
   const [mask, setMask] = useState(initial.mask);
 
   function isValid() {
@@ -72,6 +74,7 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
       mask,
       allowedOrientations,
       angles,
+      randomizeAuf,
     };
     onSubmit(drill);
   }
@@ -164,6 +167,23 @@ function DrillForm({ onSubmit, initial = {}, title = 'Drill' }) {
                 label={label}
               />
             ))}
+          </Grid>
+          <Grid item>
+            <Typography variant="subtitle2" gutterBottom>
+              AUF
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              Customize AUF behaviour.
+            </Typography>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={randomizeAuf}
+                  onChange={(event) => setRandomizeAuf(!randomizeAuf)}
+                />
+              }
+              label={'Randomize AUF'}
+            />
           </Grid>
           <Grid item>
             <Typography variant="subtitle2" gutterBottom>
